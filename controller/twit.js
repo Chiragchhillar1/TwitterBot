@@ -38,7 +38,7 @@ class twitBot
 
         var config = {
             method: 'get',
-            url: 'https://api.twitter.com/2/tweets/search/recent?query=data science, ml&tweet.fields=attachments,author_id,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,referenced_tweets,source,text,withheld&expansions=author_id,referenced_tweets.id&user.fields=description,created_at',
+            url: 'https://api.twitter.com/2/tweets/search/recent?query=datascience',
             headers: { 
               'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAAMUVQEAAAAAGnPR1%2BbS1cP%2F525ZAfzRzhJ66do%3DmqGW2gARYQ8T4CYGRWBaOf50xvBCDZDugCy2BGW66HwzdR95eF', 
               'Cookie': 'guest_id=v1%3A163558036256170269; personalization_id="v1_+Eh1tkzLE3sfM/VJArfnPA=="'
@@ -56,10 +56,12 @@ class twitBot
 
           let tweetArray = tweetsInfo.data
 
-          let tweetret = await this.reTweets(tweetArray[0].id)
+          tweetArray.forEach(tweet => {
+            console.log(tweet.id)
+            let tweetret = this.reTweets(tweet.id)
 
-          console.log(tweetret)
             console.log("Retweeted!")
+          });
         
       }
 
