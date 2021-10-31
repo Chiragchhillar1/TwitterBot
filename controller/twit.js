@@ -84,6 +84,14 @@ class twitBot
           
       }
 
+      cronTest = async() =>{
+
+        console.log("In cron test.")
+
+        return "okok";
+
+      }
+
 }
 
 module.exports = twitBot

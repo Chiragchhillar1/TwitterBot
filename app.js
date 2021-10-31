@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 const cron = require("node-cron");
+const reTwit = require('./controller/twit')
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -25,6 +26,9 @@ app.use('/users', usersRouter);
 
 // Creating a cron job which runs on every 10 second
 cron.schedule("*/10 * * * * *", function() {
+  // const mainResponse = reTwit.cronTest()
+
+  // console.log(mainResponse)
   console.log("running a task every 10 second");
 });
 
