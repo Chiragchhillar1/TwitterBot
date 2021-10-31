@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const cron = require("node-cron");
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -21,6 +22,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// Creating a cron job which runs on every 10 second
+cron.schedule("*/10 * * * * *", function() {
+  console.log("running a task every 10 second");
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
