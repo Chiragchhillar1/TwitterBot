@@ -34,11 +34,11 @@ class twitBot
 
     }
 
-    getTweets = async() => {
+    getTweets = async(topic) => {
 
         var config = {
             method: 'get',
-            url: 'https://api.twitter.com/2/tweets/search/recent?query=datascience',
+            url: 'https://api.twitter.com/2/tweets/search/recent?query='+topic,
             headers: { 
               'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAAMUVQEAAAAAGnPR1%2BbS1cP%2F525ZAfzRzhJ66do%3DmqGW2gARYQ8T4CYGRWBaOf50xvBCDZDugCy2BGW66HwzdR95eF', 
               'Cookie': 'guest_id=v1%3A163558036256170269; personalization_id="v1_+Eh1tkzLE3sfM/VJArfnPA=="'
