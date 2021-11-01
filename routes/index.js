@@ -13,7 +13,7 @@ router.get('/tweets', async (req,res) => {
   
   const getResponse = new reTwit()
 
-  const mainResponse = await getResponse.getTweets()
+  const mainResponse = await getResponse.getTweets("deeplearning")
 
   res.send("Searching Tweets!")
 
