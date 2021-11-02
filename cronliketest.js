@@ -9,7 +9,7 @@ cronjobtest = () => {
 
     const getResponse = new reTwit()
 
-    const mainResponse = getResponse.getTweets("python", "retweet")
+    const mainResponse = getResponse.getTweets("DataScience", "like")
 
     console.log("Retweeted!")
 

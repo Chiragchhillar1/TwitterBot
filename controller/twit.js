@@ -34,7 +34,7 @@ class twitBot
 
     }
 
-    getTweets = async(topic) => {
+    getTweets = async(topic, option) => {
 
         var config = {
             method: 'get',
@@ -56,13 +56,49 @@ class twitBot
 
           let tweetArray = tweetsInfo.data
 
+          if (option == "like") {
+
+            tweetArray.forEach(tweet => {
+              console.log(tweet.id)
+              let tweetret = this.likeTweets(tweet.id)
+  
+              console.log("Liked!")
+  
+            });  
+
+            return "Liked!"
+            
+          }
+
           tweetArray.forEach(tweet => {
             console.log(tweet.id)
             let tweetret = this.reTweets(tweet.id)
 
             console.log("Retweeted!")
+
           });
+
+          return "Retweeted!"
         
+      }
+
+      likeTweets = async(tweetId) => {
+
+        const request = {
+            url: 'https://api.twitter.com/2/users/1454352311334027267/likes',
+            method: 'POST',
+            body: {
+                "tweet_id": tweetId
+            }
+        };
+        
+        const authHeader = await this.getAuth(request);
+        
+        return await axios.post(
+            request.url,
+            request.body,
+            { headers: authHeader });
+          
       }
 
       reTweets = async(tweetId) => {
