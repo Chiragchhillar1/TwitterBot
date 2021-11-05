@@ -3,16 +3,19 @@ const crypto = require('crypto');
 const oauth1a = require('oauth-1.0a');
 
 const { response } = require('express');
+const URL_GET_TWEETS = process.env.TWITTER_DEV_BASE_URL + 'tweets/search/recent?query='
+const URL_LIKE_TWEETS = process.env.TWITTER_DEV_BASE_URL + `users/${process.env.TWITTER_USER_ID}/likes`
+const URL_RETWEETS = process.env.TWITTER_DEV_BASE_URL + `users/${process.env.TWITTER_USER_ID}/retweets`
 
 class twitBot
 {
 
     getAuth = async(request) => {
 
-        const CONSUMERKEY = 'ztzQhyRma6T2KJJAmV2xex03X';
-        const CONSUMERSECRET = '21nVsMdwqgDlzA0qO1ahfZajBZP6niZY8ptjoo844Tfw2kuWxP';
-        const TOKENKEY = '1454352311334027267-M9IDKLJRWiYZ9l0nkcIojhiAvMvWDg';
-        const TOKENSECRET = 'HSE1TFI6rGmeMYoq5aCGglxxcss0KcMhbP5m3aJLtdjvp';
+        const CONSUMERKEY = process.env.CONSUMERKEY;
+        const CONSUMERSECRET = process.env.CONSUMERSECRET;
+        const TOKENKEY = process.env.TOKENKEY;
+        const TOKENSECRET = process.env.TOKENSECRET;
 
         const oauth = oauth1a({
             consumer: { key: CONSUMERKEY, secret: CONSUMERSECRET },
@@ -38,10 +41,10 @@ class twitBot
 
         var config = {
             method: 'get',
-            url: 'https://api.twitter.com/2/tweets/search/recent?query='+topic,
+            url: URL_GET_TWEETS+topic,
             headers: { 
-              'Authorization': 'Bearer AAAAAAAAAAAAAAAAAAAAAAMUVQEAAAAAGnPR1%2BbS1cP%2F525ZAfzRzhJ66do%3DmqGW2gARYQ8T4CYGRWBaOf50xvBCDZDugCy2BGW66HwzdR95eF', 
-              'Cookie': 'guest_id=v1%3A163558036256170269; personalization_id="v1_+Eh1tkzLE3sfM/VJArfnPA=="'
+              'Authorization': `Bearer ${process.env.TWITTER_AUTH_BEARER_TOKEN}`, 
+              'Cookie': process.env.TWITTER_COOKIE
             }
           };
           
@@ -85,7 +88,7 @@ class twitBot
       likeTweets = async(tweetId) => {
 
         const request = {
-            url: 'https://api.twitter.com/2/users/1454352311334027267/likes',
+            url: URL_LIKE_TWEETS,
             method: 'POST',
             body: {
                 "tweet_id": tweetId
@@ -104,7 +107,7 @@ class twitBot
       reTweets = async(tweetId) => {
 
         const request = {
-            url: 'https://api.twitter.com/2/users/1454352311334027267/retweets',
+            url: URL_RETWEETS,
             method: 'POST',
             body: {
                 "tweet_id": tweetId
