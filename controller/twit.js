@@ -62,8 +62,8 @@ class twitBot
           if (option == "like") {
 
             tweetArray.forEach(tweet => {
-              console.log(tweet.id)
-              let tweetret = this.likeTweets(tweet.id)
+              console.log(tweet.id_str)
+              let tweetret = this.likeTweets(tweet.id_str)
   
               console.log("Liked!")
   
