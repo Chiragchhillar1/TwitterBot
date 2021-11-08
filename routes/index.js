@@ -23,7 +23,7 @@ router.get('/tweets/retweet', async (req,res) => {
   
   const getResponse = new reTwit()
 
-  const mainResponse = await getResponse.getTweets("deeplearning", "retweet")
+  const mainResponse = await getResponse.getTweets("datascience", "retweet")
 
   res.send("Retweeted Tweets!")
 

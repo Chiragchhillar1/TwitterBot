@@ -41,7 +41,7 @@ class twitBot
 
         var config = {
             method: 'get',
-            url: URL_GET_TWEETS+topic,
+            url: "https://api.twitter.com/1.1/search/tweets.json?q="+topic+"&result_type=mixed",
             headers: { 
               'Authorization': `Bearer ${process.env.TWITTER_AUTH_BEARER_TOKEN}`, 
               'Cookie': process.env.TWITTER_COOKIE
@@ -57,7 +57,7 @@ class twitBot
             console.log(error);
           });
 
-          let tweetArray = tweetsInfo.data
+          let tweetArray = tweetsInfo.statuses
 
           if (option == "like") {
 
@@ -74,8 +74,9 @@ class twitBot
           }
 
           tweetArray.forEach(tweet => {
-            console.log(tweet.id)
-            let tweetret = this.reTweets(tweet.id)
+            console.log(tweet.id_str)
+
+            let tweetret = this.reTweets(tweet.id_str)
 
             console.log("Retweeted!")
 
